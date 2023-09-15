@@ -1,50 +1,48 @@
 import { useReducer, useState } from "react";
+import { act } from "react-dom/test-utils";
 
-const initialState = {
-  count: 0,
-  step: 1,
-};
-
-function stateReducer(state, action) {
-  switch (action.type) {
-    case "inc":
-      return { count: state.count + state.step };
-    case "dec":
-      return { count: state.count - state.step };
-    default:
-      throw new Error("Could not find the value");
-  }
+function reducer(state, action) {
+  console.log(state, action);
+  if (action.type === "inc") return state + 1;
+  if (action.type === "dec") return state - 1;
+  if (action.type === "setCount") return action.payload;
 }
 
 function DateCounter() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+
+  const [count, dispatch] = useReducer(reducer, 0);
+
   const [step, setStep] = useState(1);
 
-  const [state, dispatch] = useReducer(stateReducer, initialState);
+  // const [state, dispatch] = useReducer(stateReducer, initialState);
   // This mutates the date object.
   const date = new Date("june 21 2027");
   date.setDate(date.getDate() + count);
 
-  // const dec = function () {
-  //   // setCount((count) => count - 1);
-  //   setCount((count) => count - step);
-  // };
+  const dec = function () {
+    // setCount((count) => count - 1);
+    // setCount((count) => count - step);
+    dispatch({ type: "dec" });
+  };
 
-  // const inc = function () {
-  //   // setCount((count) => count + 1);
-  //   setCount((count) => count + step);
-  // };
-
+  const inc = function () {
+    // setCount((count) => count + 1);
+    // setCount((count) => count + step);
+    dispatch({ type: "inc" });
+  };
   const defineCount = function (e) {
-    setCount(Number(e.target.value));
+    // setCount(Number(e.target.value));
+    dispatch({ type: "setCount", payload: Number(e.target.value) });
   };
 
   const defineStep = function (e) {
-    setStep(Number(e.target.value));
+    // setStep(Number(e.target.value));
+    dispatch({ type: "setStep", payload: Number(e.target.value) });
   };
 
   const reset = function () {
-    setCount(0);
+    // setCount(0);
     setStep(1);
   };
 
@@ -62,11 +60,11 @@ function DateCounter() {
       </div>
 
       <div>
-        {/* <button onClick={dec}>-</button> */}
-        <button onClick={() => dispatch({ type: "dec" })}>-</button>
-        <input value={state.count} onChange={defineCount} />
-        <button onClick={() => dispatch({ type: "inc" })}>+</button>
-        {/* <button onClick={inc}>+</button> */}
+        <button onClick={dec}>-</button>
+        {/* <button onClick={() => dispatch({ type: "dec" })}>-</button> */}
+        <input value={count} onChange={defineCount} />
+        {/* <button onClick={() => dispatch({ type: "inc" })}>+</button> */}
+        <button onClick={inc}>+</button>
       </div>
 
       <p>{date.toDateString()}</p>
