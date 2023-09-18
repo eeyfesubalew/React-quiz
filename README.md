@@ -1,3 +1,7 @@
+![Screenshot 2023-09-19 010030](https://github.com/seyfe-esubalew/React-quiz/assets/83219979/fa6d769c-bf17-48b5-b718-b91cd80ec0c1)
+![Screenshot 2023-09-19 010042](https://github.com/seyfe-esubalew/React-quiz/assets/83219979/915b7447-9363-4c32-987a-10c536757b4f)
+![Screenshot 2023-09-19 010112](https://github.com/seyfe-esubalew/React-quiz/assets/83219979/2739de28-5f33-44a3-b890-fd4de79c2ce0)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
